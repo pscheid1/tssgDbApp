@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../_services/team.service';
-import Team from 'src/app/_models/team';
+import { Team } from 'src/app/_models/team';
 import { UserService } from '../_services/user.service';
 
 @Component({

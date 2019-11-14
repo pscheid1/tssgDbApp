@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
   HttpResponse
 } from '@angular/common/http';
-import Team from 'src/app/_models/team';
+import { Team } from 'src/app/_models/team';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
