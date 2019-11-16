@@ -28,15 +28,15 @@ export class MeetingAddComponent implements OnInit {
     comments: null
   };
 
-  newMeeting: Meeting = {
-    _id: null,
-    team: null,
-    venue: null,
-    meetingDate: null,
-    startTime: null,
-    endTime: null,
-    comments: null
-  };
+  // newMeeting: Meeting = {
+  //   _id: null,
+  //   team: null,
+  //   venue: null,
+  //   meetingDate: null,
+  //   startTime: null,
+  //   endTime: null,
+  //   comments: null
+  // };
 
   hstep = 1;
   mstep = 15;
@@ -75,6 +75,54 @@ export class MeetingAddComponent implements OnInit {
   }
 
   addMeeting(meetingForm: NgForm): void {
+    console.error('startTime: ' + this.meeting.startTime);
+    console.error('endTime: ' + this.meeting.endTime);
+
+    let hours = this.meeting.startTime.getHours();
+    if (hours < 0 || hours > 23) {
+      this.errorMsg = 'Invalid meeting startTime. Hours must be 0 thru 23.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    let minutes = this.meeting.startTime.getMinutes();
+    if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
+      this.errorMsg = 'Invalid meeting startTime. Minutes must be 00, 15, 30 or 45.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    hours = this.meeting.endTime.getHours();
+    if (hours < 0 || hours > 23) {
+      this.errorMsg = 'Invalid meeting endTime. Hours must be 0 thru 23.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    minutes = this.meeting.endTime.getMinutes();
+    if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
+      this.errorMsg = 'Invalid meeting endTime. Minutes must be 00, 15, 30 or 45.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    if (this.meeting.endTime <= this.meeting.startTime) {
+      this.errorMsg = 'Meeting endTime must be > meeting startTime';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    this.errorMsg = '';
     this.ms.addMeeting(this.meeting)
       .then(res => {
         this.router.navigate(['meeting']);

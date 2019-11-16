@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private us: UserService,
+    private router: Router,
     private authenticationService: AuthenticationService
   ) {
     this.currentUser = this.authenticationService.currentUserValue;
@@ -32,6 +33,11 @@ export class HomeComponent implements OnInit {
       this.errorMsg = 'User is not authorized for this request.';
     } else {
       this.errorMsg = '';
+    }
+
+    if (this.currentUser === null) {
+      // return;
+      this.router.navigate(['user/login']);
     }
     this.us.getById(this.currentUser._id)
     .then(res => {

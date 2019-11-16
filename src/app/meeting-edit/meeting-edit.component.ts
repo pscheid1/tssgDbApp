@@ -119,6 +119,53 @@ export class MeetingEditComponent implements OnInit {
 
   // post updated meeting data back to node server via meeting.service.ts update
   updateMeeting(meetingForm: NgForm) {
+    // console.error('startTime: ' + this.meeting.startTime);
+    // console.error('endTime: ' + this.meeting.endTime);
+
+    let hours = this.meeting.startTime.getHours();
+    if (hours < 0 || hours > 23) {
+      this.errorMsg = 'Invalid meeting startTime. Hours must be 0 thru 23.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    let minutes = this.meeting.startTime.getMinutes();
+    if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
+      this.errorMsg = 'Invalid meeting startTime. Minutes must be 00, 15, 30 or 45.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    hours = this.meeting.endTime.getHours();
+    if (hours < 0 || hours > 23) {
+      this.errorMsg = 'Invalid meeting endTime. Hours must be 0 thru 23.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    minutes = this.meeting.endTime.getMinutes();
+    if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
+      this.errorMsg = 'Invalid meeting endTime. Minutes must be 00, 15, 30 or 45.';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
+    if (this.meeting.endTime <= this.meeting.startTime) {
+      this.errorMsg = 'Meeting endTime must be > meeting startTime';
+      if ((window.location.href).indexOf('#bottom') < 0) {
+        window.location.href = window.location.href + '#bottom';
+      }
+      return;
+    }
+
     // if meetingDate has not been changed, it is returned as a string representing an ISO date format
     // if meetingDate has been changed, it is returned as a Date object
     // this.typeOf = Object.prototype.toString.call(this.meeting.meetingDate).replace(/^\[object (.+)\]$/, '$1').toLowerCase();
