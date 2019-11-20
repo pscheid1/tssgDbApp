@@ -56,7 +56,7 @@ export class MeetingAddComponent implements OnInit {
       containerClass: 'theme-dark-blue',
       showWeekNumbers: false,
       minDate: new Date(),              // prevent scheduling prior to current date
-      dateInputFormat: 'YYYY-MM-DD',
+      dateInputFormat: 'YYYY-MM-DD'
     });
 
   }
@@ -74,51 +74,101 @@ export class MeetingAddComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   addMeeting(meetingForm: NgForm): void {
-    console.error('startTime: ' + this.meeting.startTime);
-    console.error('endTime: ' + this.meeting.endTime);
+    console.error('meeting-add.addMeeting _id: ' + this.meeting._id);
+    console.error('meeting-add.addMeeting team: ' + this.meeting.team);
+    console.error('meeting-add.addMeeting venue: ' + this.meeting.venue);
+
+    console.error('meeting-add.addMeeting meetingDate: ' + this.meeting.meetingDate);
+    console.error('meeting-add.addMeeting startTime: ' + this.meeting.startTime);
+    console.error('meeting-add.addMeeting endTime: ' + this.meeting.endTime);
+    console.error('meeting-add.addMeeting comments: ' + this.meeting.comments);
+
+    if (this.meeting._id === null) {
+      this.errorMsg = 'Meeting Id is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.team === null) {
+      this.errorMsg = 'Meeting Team is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.venue === null) {
+      this.errorMsg = 'Meeting Venue is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.meetingDate === null) {
+      this.errorMsg = 'Meeting meetingDate is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.startTime === null) {
+      this.errorMsg = 'Meeting startTime is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.endTime === null) {
+      this.errorMsg = 'Meeting endTime is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.comments === null || this.meeting.comments === '') {
+      this.errorMsg = 'A Comments entry is required.';
+      this.forceElementView('bottom');
+      return;
+    }
 
     let hours = this.meeting.startTime.getHours();
     if (hours < 0 || hours > 23) {
       this.errorMsg = 'Invalid meeting startTime. Hours must be 0 thru 23.';
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
+      this.forceElementView('bottom');
       return;
     }
 
     let minutes = this.meeting.startTime.getMinutes();
     if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
       this.errorMsg = 'Invalid meeting startTime. Minutes must be 00, 15, 30 or 45.';
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
+      this.forceElementView('bottom');
       return;
     }
 
     hours = this.meeting.endTime.getHours();
     if (hours < 0 || hours > 23) {
       this.errorMsg = 'Invalid meeting endTime. Hours must be 0 thru 23.';
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
+      this.forceElementView('bottom');
       return;
     }
 
     minutes = this.meeting.endTime.getMinutes();
     if (minutes !== 0 && minutes !== 15 && minutes !== 30 && minutes !== 45) {
       this.errorMsg = 'Invalid meeting endTime. Minutes must be 00, 15, 30 or 45.';
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
+      this.forceElementView('bottom');
       return;
     }
 
     if (this.meeting.endTime <= this.meeting.startTime) {
       this.errorMsg = 'Meeting endTime must be > meeting startTime';
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.meeting.meetingDate < new Date()) {
+      this.errorMsg = 'Cannot create a meeting in the past.';
+      this.forceElementView('bottom');
       return;
     }
 
@@ -129,9 +179,10 @@ export class MeetingAddComponent implements OnInit {
       })
       .catch(err => {
         this.errorMsg = err.status + ': ' + err.statusText;
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
       });
+
+    if (this.errorMsg !== '') {
+      this.forceElementView('bottom');
+    }
   }
 }

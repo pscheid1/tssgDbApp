@@ -35,8 +35,8 @@
       <div class="form-group">
         <label for="meetingDate" class="control-label"> Meeting Date</label>
         <div class="input-group small-entry">
-          <input required id="meetingDate" name="meetingDate" placement="right" class="form-control"
-            [(ngModel)]="meeting.meetingDate" [bsConfig]="datePickerConfig" bsDatepicker type="text">
+          <input id="meetingDate" name="meetingDate" placeholder="yyyy-mm-dd" class="form-control"
+            [(ngModel)]="meeting.meetingDate" [bsConfig]="datePickerConfig" bsDatepicker type="text" placement="right">
         </div>
       </div>
 
@@ -53,14 +53,15 @@
       <div class="form-group" [class.has-error]="comments.invalid && comments.touched"
         [class.has-success]="comments.valid">
         <label for="comments" class="control-label">Comments</label>
-        <input required id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
+        <input id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
           #comments="ngModel">
         <span class="alert alert-danger" *ngIf="comments.invalid && comments.touched">
           Comment is required
         </span>
       </div>
       <div class="form-group">
-        <button type='submit' class='btn btn-primary' [disabled]='meetingForm.invalid'>Save</button>
+        <!-- <button type='submit' class='btn btn-primary' [disabled]='meetingForm.invalid'>Save</button> -->
+        <button type='submit' class='btn btn-primary'>Save</button>
         &nbsp;
         <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
       </div>
