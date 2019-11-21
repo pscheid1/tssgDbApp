@@ -2,8 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Edit Venue</h4>
-      <p>This page can only be accessed by administrators.</p>
-      <p>All users from secure (admin only) api end point:</p>
+      <p></p>
     </div>
     <div class="panel-body">
       <div class="form-group" [class.has-error]="_id.invalid && _id.touched" [class.has-success]="_id.valid">
@@ -22,17 +21,20 @@
           Venue description is required
         </span>
       </div>
-      <div class="form-group">
+      <div class="form-group" [class.has-error] = "contact.invalid && contact.touched"
+      [class.has-success]="contact.valid">
         <label for="contact" class="control-label"> Contact (select one)</label>
-        <select id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #teamlead="ngModel">
+        <select required id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #contact="ngModel">
           <option *ngFor="let contact of contactList" [value]="contact"> {{contact}}</option>
         </select>
+        <span class="alert alert-danger" *ngIf="contact.invalid && contact.touched">
+          Contact entry is required
+        </span>
       </div>
-
       <div class="form-group" [class.has-error]="website.invalid && website.touched"
         [class.has-success]="website.valid">
         <label for="website" class="control-label"> Website URL</label>
-        <input id="website" name="website" type="url" class="form-control" [(ngModel)]="venue.website"
+        <input required id="website" name="website" type="url" class="form-control" [(ngModel)]="venue.website"
           #website="ngModel">
         <span class="alert alert-danger" *ngIf="website.invalid && website.touched">
           Venue website url is required
@@ -41,7 +43,7 @@
       <div class="form-group" [class.has-error]="calendar.invalid && calendar.touched"
         [class.has-success]="calendar.valid">
         <label for="calendar" class="control-label"> Calender URL</label>
-        <input id="calendar" name="calendar" type="url" class="form-control" [(ngModel)]="venue.calendar"
+        <input required id="calendar" name="calendar" type="url" class="form-control" [(ngModel)]="venue.calendar"
           #calendar="ngModel">
         <span class="alert alert-danger" *ngIf="calendar.invalid && calendar.touched">
           Venue calander url is required
@@ -50,7 +52,7 @@
       <div class="form-group" [class.has-error]="address.invalid && address.touched"
         [class.has-success]="address.valid">
         <label for="address" class="control-label"> Address</label>
-        <input id="address" name="address" type="text" class="form-control" [(ngModel)]="venue.address"
+        <input required id="address" name="address" type="text" class="form-control" [(ngModel)]="venue.address"
           #address="ngModel">
         <span class="alert alert-danger" *ngIf="address.invalid && address.touched">
           Venue addtress is required
@@ -58,7 +60,7 @@
       </div>
       <div class="form-group" [class.has-error]="town.invalid && town.touched" [class.has-success]="town.valid">
         <label for="town" class="control-label"> Town</label>
-        <input id="town" name="town" type="text" class="form-control" [(ngModel)]="venue.town" #town="ngModel">
+        <input required id="town" name="town" type="text" class="form-control" [(ngModel)]="venue.town" #town="ngModel">
         <span class="alert alert-danger" *ngIf="town.invalid && town.touched">
           Venue town is required
         </span>
@@ -66,29 +68,30 @@
       <div class="form-group" [class.has-error]="location.invalid && location.touched"
         [class.has-success]="location.valid">
         <label for="location" class="control-label"> Location (Map url)</label>
-        <input id="location" name="location" type="url" class="form-control" [(ngModel)]="venue.location"
+        <input required id="location" name="location" type="url" class="form-control" [(ngModel)]="venue.location"
           #location="ngModel">
         <span class="alert alert-danger" *ngIf="location.invalid && location.touched">
-          Venue location is required
+          Venue location url is required
         </span>
       </div>
       <div class="form-group" [class.has-error]="iconimage.invalid && iconimage.touched"
         [class.has-success]="iconimage.valid">
         <label for="iconimage" class="control-label"> Icon Image (path/file)</label>
-        <input id="iconimage" name="iconimage" type="text" class="form-control" [(ngModel)]="venue.iconimage"
+        <input requied id="iconimage" name="iconimage" type="text" class="form-control" [(ngModel)]="venue.iconimage"
           #iconimage="ngModel">
         <span class="alert alert-danger" *ngIf="iconimage.invalid && iconimage.touched">
-          Icon Image path & file name are required.
+          Image path/file is required.
         </span>
       </div>
     </div>
     <!-- post the updated venue back to the node server via venue-edit.component.ts -->
     <div class="form-group">
-      <button type="submit" class="btn btn-primary" [disabled]="venueForm.invalid">Save</button>
+      <!-- <button type="submit" class="btn btn-primary" [disabled]="venueForm.invalid">Save</button> -->
+      <button type="submit" class="btn btn-primary">Save</button>
       &nbsp;
       <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
     </div>
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom" href="#bottom"></a></div>
+<div><br/><br/><br/><br/><a id="bottom"></a></div>

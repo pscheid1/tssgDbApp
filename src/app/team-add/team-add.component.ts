@@ -53,16 +53,72 @@ export class TeamAddComponent implements OnInit {
     this.router.navigate(['team']);
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   addTeam(teamForm: NgForm) {
+
+    if (this.team._id === null) {
+      this.errorMsg = 'Team name is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.team._id = this.team._id.trim();
+    if (this.team._id.length === 0) {
+      this.errorMsg = 'Team name is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.team.description === null) {
+      this.errorMsg = 'Team description is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.team.description = this.team.description.trim();
+    if (this.team.description.length === 0) {
+      this.errorMsg = 'Team description is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.team.teamLead === null) {
+      this.errorMsg = 'Team lead is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.team.teamLead = this.team.teamLead.trim();
+    if (this.team.teamLead.length === 0) {
+      this.errorMsg = 'Team lead is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.team.members === null) {
+      this.errorMsg = 'One or more team members are required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    if (this.team.members.length === 0) {
+      this.errorMsg = 'One or more team members are required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    this.team.zoomLink = this.team.zoomLink.trim();
+    this.team.comments = this.team.comments.trim();
+
+    this.errorMsg = '';
     this.ts.addteam(this.team)
       .then(res => {
         this.router.navigate(['team']);
       })
       .catch(err => {
         this.errorMsg = err.status + ': ' + err.statusText;
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
   }
 

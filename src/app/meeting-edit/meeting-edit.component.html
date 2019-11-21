@@ -2,8 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Edit Meeting</h4>
-      <p>This page can only be accessed by administrators.</p>
-      <!-- <p>All meetings from secure (admin only) api end point:</p> -->
+      <p></p>
     </div>
     <div class="panel-body">
 
@@ -35,25 +34,25 @@
       <div class="form-group">
         <label for="meetingDate" class="control-label"> Meeting Date</label>
         <div class="input-group small-entry">
-          <input id="meetingDate" name="meetingDate" placeholder="yyyy-mm-dd" class="form-control"
+          <input required id="meetingDate" name="meetingDate" placeholder="yyyy-mm-dd" class="form-control"
             [(ngModel)]="meeting.meetingDate" [bsConfig]="datePickerConfig" bsDatepicker type="text" placement="right">
         </div>
       </div>
 
       <label for="meeting.startTime" class="control-label">Start Time</label>
-      <timepicker id="meeting.startTime" name="meeting.startTime" [(ngModel)]="meeting.startTime"
+      <timepicker required id="meeting.startTime" name="meeting.startTime" [(ngModel)]="meeting.startTime"
         [hourStep]="hstep" [minuteStep]="mstep" [showSeconds]="false" [ngModelOptions]="{standalone: true}">
       </timepicker>
 
       <label for="meeting.endTime" class="control-label">End Time</label>
-      <timepicker id="meeting.endTime" name="meeting.endTime" [(ngModel)]="meeting.endTime" [hourStep]="hstep"
+      <timepicker required id="meeting.endTime" name="meeting.endTime" [(ngModel)]="meeting.endTime" [hourStep]="hstep"
         [minuteStep]="mstep" [showSeconds]="false" [ngModelOptions]="{standalone: true}">
       </timepicker>
 
       <div class="form-group" [class.has-error]="comments.invalid && comments.touched"
         [class.has-success]="comments.valid">
         <label for="comments" class="control-label">Comments</label>
-        <input id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
+        <input required id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
           #comments="ngModel">
         <span class="alert alert-danger" *ngIf="comments.invalid && comments.touched">
           Comment is required

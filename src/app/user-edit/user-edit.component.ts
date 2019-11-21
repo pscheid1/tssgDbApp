@@ -90,14 +90,6 @@ export class UserEditComponent implements OnInit {
         });
     });
 
-
-    // this.us.getById(`${params._id}`).pipe(first()).subscribe(user => {
-    //   const usr = user as User;
-    //   if (usr.createdDate) {
-    //     this.dspCreatedDate = usr.createdDate.toString().substring(0, 10);
-    //   }
-    //   this.user = user as User;
-    // });
   }
 
   cancel() {
@@ -108,7 +100,92 @@ export class UserEditComponent implements OnInit {
     }
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   updateUser(userForm: any) {
+
+    if (this.user.username === null) {
+      this.errorMsg = 'Username is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.user.username = this.user.username.trim();
+    if (this.user.username.length === 0) {
+      this.errorMsg = 'Username is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    // if (this.user.password === null) {
+    //   this.errorMsg = 'Password is required.';
+    //   this.forceElementView('bottom');
+    //   return;
+    // }
+    // this.user.password = this.user.password.trim();
+    // if (this.user.password.length === 0) {
+    //   this.errorMsg = 'Password is required.';
+    //   this.forceElementView('bottom');
+    //   return;
+    // }
+
+    if (this.user.firstname === null) {
+      this.errorMsg = 'Firstname is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.user.firstname = this.user.firstname.trim();
+    if (this.user.firstname.length === 0) {
+      this.errorMsg = 'Firstname is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.user.lastname === null) {
+      this.errorMsg = 'Lastname is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.user.lastname = this.user.lastname.trim();
+    if (this.user.lastname.length === 0) {
+      this.errorMsg = 'Lastname is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.user.role === null) {
+      this.errorMsg = 'Role is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.user.email === null) {
+      this.errorMsg = 'Email is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.user.email = this.user.email.trim();
+    if (this.user.email.length === 0) {
+      this.errorMsg = 'Email is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
+    if (this.user.mobile === null) {
+      this.errorMsg = 'Mobile is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.user.mobile = this.user.mobile.trim();
+    if (this.user.mobile.length === 0) {
+      this.errorMsg = 'Mobile is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+
     this.us.updateUser(this.user)
       .then(res => {
         if (this.route.snapshot.data.type === 'get-all') {
@@ -119,12 +196,7 @@ export class UserEditComponent implements OnInit {
       })
       .catch(err => {
         this.errorMsg = err;
-        // ensure href does not already contain '#bottom'
-        // if not, add '#bottom' to scroll page to bottom to
-        // insure error message is visable
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
   }
 }

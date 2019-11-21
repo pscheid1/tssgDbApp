@@ -2,7 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Add New Venue</h4>
-      <p>This page can only be accessed by administrators.</p>
+      <p></p>
     </div>
     <div class="panel-body">
       <div class="form-group" [class.has-error]="_id.invalid && _id.touched" [class.has-success]="_id.valid">
@@ -21,28 +21,32 @@
           Venue description is required
         </span>
       </div>
-      <div class="form-group">
+      <div class="form-group" [class.has-error] = "contact.invalid && contact.touched"
+      [class.has-success]="contact.valid">
         <label for="contact" class="control-label"> Contact (select one)</label>
-        <select id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #teamlead="ngModel">
+        <select required id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #contact="ngModel">
           <option *ngFor="let contact of contactList" [value]="contact"> {{contact}}</option>
         </select>
+        <span class="alert alert-danger" *ngIf="contact.invalid && contact.touched">
+          Contact entry is required
+        </span>
       </div>
       <div class="form-group" [class.has-error]="website.invalid && website.touched"
         [class.has-success]="website.valid">
-        <label for="website" class="control-label"> Website</label>
-        <input required id="website" name="website" type="text" class="form-control" [(ngModel)]="venue.website"
+        <label for="website" class="control-label"> Website URL</label>
+        <input required id="website" name="website" type="url" class="form-control" [(ngModel)]="venue.website"
           #website="ngModel">
         <span class="alert alert-danger" *ngIf="website.invalid && website.touched">
-          Venue website link is required.
+          Venue website url is required.
         </span>
       </div>
       <div class="form-group" [class.has-error]="calendar.invalid && calendar.touched"
         [class.has-success]="calendar.valid">
-        <label for="calendar" class="control-label"> Calendar</label>
+        <label for="calendar" class="control-label"> Calendar URL</label>
         <input required id="calendar" name="calendar" type="text" class="form-control" [(ngModel)]="venue.calendar"
           #calendar="ngModel">
         <span class="alert alert-danger" *ngIf="calendar.invalid && calendar.touched">
-          Venue calendar link is required.
+          Venue calendar url is required.
         </span>
       </div>
       <div class="form-group" [class.has-error]="address.invalid && address.touched"
@@ -67,20 +71,21 @@
         <input required id="location" name="location" type="text" class="form-control" [(ngModel)]="venue.location"
           #location="ngModel">
         <span class="alert alert-danger" *ngIf="location.invalid && location.touched">
-          Venue location link is required.
+          Venue location url is required.
         </span>
       </div>
       <div class="form-group" [class.has-error]="iconimage.invalid && iconimage.touched"
         [class.has-success]="iconimage.valid">
-        <label for="iconimage" class="control-label"> Icon Image</label>
+        <label for="iconimage" class="control-label"> Venue Icon Image (path/file)</label>
         <input required id="iconimage" name="iconimage" type="text" class="form-control" [(ngModel)]="venue.iconimage"
           #iconimage="ngModel">
         <span class="alert alert-danger" *ngIf="iconimage.invalid && iconimage.touched">
-          Icon Image file and path are required.
+          Image path/file is required.
         </span>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="venueForm.invalid">Save</button>
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="venueForm.invalid">Save</button> -->
+        <button type="submit" class="btn btn-primary">Save</button>
         &nbsp;
         <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
       </div>
@@ -88,7 +93,7 @@
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom" href="#bottom"></a></div>
+<div><br /><br /><br /><br /><a id="bottom"></a></div>
 <!--
 <br /><br />
 Angular Generated Form Model : {{venueForm.value | json}}

@@ -2,12 +2,12 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Add User</h4>
-      <p>This page can only be accessed by administrators.</p>
+      <p></p>
     </div>
     <div class="panel-body">
       <div class="form-group" [class.has-error]="username.invalid && username.touched"
         [class.has-success]="username.valid">
-        <label for="username" class="control-label"> Username</label>
+        <label for="username" class="control-label"> Username (must be unique)</label>
         <input required id="username" name="username" type="text" class="form-control" [(ngModel)]="user.username"
           #username="ngModel">
         <span class="alert alert-danger" *ngIf="username.invalid && username.touched">
@@ -32,15 +32,6 @@
             style="width:4ch">Admin
           <input required type="radio" value="Contact" name="role" [(ngModel)]="user.role" #role="ngModel"
             style="width:4ch">Contact
-          <p>
-            <!-- following validity tests are the only way I can think of to keep from prematurely
-                 displaying "Role is Required" warning.
-            -->
-            <span class="alert alert-danger" *ngIf="role.invalid && password.valid && firstname.valid
-            && lastname.valid && email.valid && mobile.valid">
-              Role is required
-            </span>
-          </p>
         </div>
       </div>
       <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched"
@@ -90,14 +81,15 @@
       </div>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button>
+      <!-- <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Save</button> -->
+      <button type="submit" class="btn btn-primary">Save</button>
       &nbsp;
       <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
     </div>
     </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom" href="#bottom"></a></div>
+<div><br/><br/><br/><br/><a id="bottom"></a></div>
 <!-- <br/><br/>
 Error message: {{error}}
 <br/><br/>

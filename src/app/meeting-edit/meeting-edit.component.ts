@@ -165,7 +165,13 @@ export class MeetingEditComponent implements OnInit {
       return;
     }
 
-    if (this.meeting.comments === null || this.meeting.comments === '') {
+    if (this.meeting.comments === null) {
+      this.errorMsg = 'A Comments entry is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.meeting.comments = this.meeting.comments.trim();
+    if (this.meeting.comments.length === 0) {
       this.errorMsg = 'A Comments entry is required.';
       this.forceElementView('bottom');
       return;

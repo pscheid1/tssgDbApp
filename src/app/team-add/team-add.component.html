@@ -2,7 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Add New Team</h4>
-      <!-- <p>This page can only be accessed by administrators.</p> -->
+      <p></p>
     </div>
     <div class="panel-body">
       <div class="form-group" [class.has-error]="_id.invalid && _id.touched" [class.has-success]="_id.valid">
@@ -22,34 +22,45 @@
         </span>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [class.has-error]="teamlead.invalid && teamlead.touched"
+      [class.has-success]="teamlead.valid">
         <label for="teamlead" class="control-label"> Team Lead (select one)</label>
-        <select id="teamlead" name="teamlead" class="form-control" [(ngModel)]="team.teamLead"
+        <select required id="teamlead" name="teamlead" class="form-control" [(ngModel)]="team.teamLead"
           #teamlead="ngModel">
           <option *ngFor="let teamLead of leaderList" [value]="teamLead"> {{teamLead}}</option>
         </select>
+        <span class="alert alert-danger" *ngIf="teamlead.invalid && teamlead.touched">
+          Team Lead is required
+        </span>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [class.has-error]="members.invalid && members.touched"
+      [class.has-success]="members.valid">
         <label for="members" class="control-label"> Team Members (select multiple - Ctrl-select)</label>
-        <select multiple id="members" name="members" class="form-control" [(ngModel)]="team.members"
+        <select required multiple id="members" name="members" class="form-control" [(ngModel)]="team.members"
           #members="ngModel">
           <option *ngFor="let members of memberList" [value]="members"> {{members}}</option>
         </select>
+        <span class="alert alert-danger" *ngIf="members.invalid && members.touched">
+        At least one member is required
+        </span>
       </div>
 
       <div class="form-group">
-        <label for="zoomlink" class="control-label"> Zoom Link</label>
+        <label for="zoomlink" class="control-label"> Meeting Link (Zoom, Hangout, etc.)</label>
         <input id="zoomlink" name="zoomlink" type="text" class="form-control" [(ngModel)]="team.zoomLink"
           #website="ngModel">
       </div>
+
       <div class="form-group">
         <label for="comments" class="control-label">Comments</label>
         <input id="comments" name="comments" type="text" class="form-control" [(ngModel)]="team.comments"
           #comments="ngModel">
       </div>
+
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="teamForm.invalid">Save</button>
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="teamForm.invalid">Save</button> -->
+        <button type="submit" class="btn btn-primary">Save</button>
         &nbsp;
         <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
       </div>

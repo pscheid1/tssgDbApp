@@ -81,14 +81,6 @@ export class MeetingAddComponent implements OnInit {
   }
 
   addMeeting(meetingForm: NgForm): void {
-    console.error('meeting-add.addMeeting _id: ' + this.meeting._id);
-    console.error('meeting-add.addMeeting team: ' + this.meeting.team);
-    console.error('meeting-add.addMeeting venue: ' + this.meeting.venue);
-
-    console.error('meeting-add.addMeeting meetingDate: ' + this.meeting.meetingDate);
-    console.error('meeting-add.addMeeting startTime: ' + this.meeting.startTime);
-    console.error('meeting-add.addMeeting endTime: ' + this.meeting.endTime);
-    console.error('meeting-add.addMeeting comments: ' + this.meeting.comments);
 
     if (this.meeting._id === null) {
       this.errorMsg = 'Meeting Id is required.';
@@ -126,7 +118,13 @@ export class MeetingAddComponent implements OnInit {
       return;
     }
 
-    if (this.meeting.comments === null || this.meeting.comments === '') {
+    if (this.meeting.comments === null) {
+      this.errorMsg = 'A Comments entry is required.';
+      this.forceElementView('bottom');
+      return;
+    }
+    this.meeting.comments = this.meeting.comments.trim();
+    if (this.meeting.comments.length === 0) {
       this.errorMsg = 'A Comments entry is required.';
       this.forceElementView('bottom');
       return;
