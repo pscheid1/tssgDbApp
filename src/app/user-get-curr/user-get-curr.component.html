@@ -2,8 +2,8 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">Current User</h4>
+      <p>&nbsp;</p>
     </div>
-    <p>&nbsp;</p>
     <table class="table-fixed">
       <thead>
         <tr>
@@ -16,10 +16,8 @@
           <th></th>
         </tr>
       </thead>
-
       <tbody>
-        <!-- three empty lines will push first display line below  -->
-        <tr>&nbsp;</tr>
+        <!-- two empty lines will push first display line below header line -->
         <tr>&nbsp;</tr>
         <tr>&nbsp;</tr>
         <tr *ngIf="userFromApi">
@@ -34,14 +32,12 @@
         <tr *ngIf="!userFromApi && !errorMsg">
           <td colspan="5">Loading data. Please wait... </td>
         </tr>
-<!--
         <tr *ngIf="!userFromApi && !errorMsg" class="alert alert-danger">
           <td colspan="5">No User info to display</td>
         </tr>
-  -->
       </tbody>
     </table>
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom" href="#bottom"></a></div>
+<div><br/><br/><br/><br/><a id="bottom" href="#bottom"></a></div>
