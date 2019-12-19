@@ -23,6 +23,12 @@ export class TeamGetComponent implements OnInit {
     });
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   deleteTeam(_id) {
     this.errorMsg = '';
     this.ts.deleteTeam(_id)
@@ -31,9 +37,7 @@ export class TeamGetComponent implements OnInit {
       })
       .catch(err => {
         this.errorMsg = err.status + ': ' + err.statusText;
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
   }
 }

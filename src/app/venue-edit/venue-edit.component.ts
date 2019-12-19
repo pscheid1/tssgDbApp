@@ -59,9 +59,7 @@ export class VenueEditComponent implements OnInit {
           if (err.statusText.includes('Unknown')) {
             this.errorMsg += ' - Possible no connection with backend server.';
           }
-          if ((window.location.href).indexOf('#bottom') < 0) {
-            window.location.href = window.location.href + '#bottom';
-          }
+          this.forceElementView('bottom');
         });
     });
   }

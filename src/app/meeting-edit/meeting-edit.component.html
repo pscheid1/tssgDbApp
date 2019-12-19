@@ -35,7 +35,7 @@
         <label for="meetingDate" class="control-label"> Meeting Date</label>
         <div class="input-group small-entry">
           <input required id="meetingDate" name="meetingDate" placeholder="yyyy-mm-dd" class="form-control"
-            [(ngModel)]="meeting.meetingDate" [bsConfig]="datePickerConfig" bsDatepicker type="text" placement="right">
+            [(ngModel)]="meeting.meetingDate" [bsConfig]="datePickerConfig" bsDatepicker placement="right">
         </div>
       </div>
 
@@ -68,4 +68,11 @@
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom" href="#bottom"></a></div>
+<div><br/><br/><br/><br/><a id="bottom"></a></div>
+
+<br /><br />
+<!--
+Angular Generated Form Model : {{meetingForm.value | json}}
+<br /><br />
+Our Meeting Model : {{meeting | json}}
+-->

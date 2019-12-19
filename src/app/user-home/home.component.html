@@ -11,6 +11,10 @@
         <li>Your role is: <strong>{{currentUser.role}}</strong></li>
         <li>You are logged in with Angular 8 & JWT</li>
       </ul>
+      <ul>
+        <li>tssgDbApi version: <strong>1.0.0</strong></li>
+        <li>tssgDbApp version: <strong>1.0.0</strong></li>
+      </ul>
       <ul *ngIf="!currentUser">
         <li style="font-weight:bold">Currently you are not logged in.</li>
       </ul>
@@ -18,4 +22,4 @@
   </div>
 </form>
 <div id="errMsg" *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom" href="#bottom"></a></div>
+<div><br /><br /><br /><br /><a id="bottom"></a></div>

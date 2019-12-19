@@ -24,6 +24,12 @@ export class VenueGetComponent implements OnInit {
     });
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   deleteVenue(_id) {
     this.errorMsg = '';
     this.vs.deleteVenue(_id)
@@ -32,9 +38,7 @@ export class VenueGetComponent implements OnInit {
       })
       .catch(err => {
         this.errorMsg = err.status + ': ' + err.statusText;
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
   }
 }

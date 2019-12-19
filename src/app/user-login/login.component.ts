@@ -62,9 +62,14 @@ export class LoginComponent implements OnInit {
         error => {
           this.errorMsg = error.includes('Unknown') ? error +
             ' - Possible no connection with backend server.' : error;
-          if ((window.location.href).indexOf('#bottom') < 0) {
-            window.location.href = window.location.href + '#bottom';
-          }
+          this.forceElementView('bottom');
         });
   }
+
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
 }

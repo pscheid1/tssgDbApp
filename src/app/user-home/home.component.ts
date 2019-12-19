@@ -40,25 +40,29 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['user/login']);
     }
     this.us.getById(this.currentUser._id)
-    .then(res => {
-      const usr = res as User;
-      if (usr.createdDate) {
-        this.dspCreatedDate = usr.createdDate.toString().substring(0, 10);
-      }
-      this.userFromApi = usr;
-    })
-    .catch(err => {
-      this.errorMsg = err.status + ': ' + err.statusText;
-      if (err.statusText.includes('Unknown')) {
-        this.errorMsg += ' - Possible no connection with backend server.';
-      }
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
-    });
+      .then(res => {
+        const usr = res as User;
+        if (usr.createdDate) {
+          this.dspCreatedDate = usr.createdDate.toString().substring(0, 10);
+        }
+        this.userFromApi = usr;
+      })
+      .catch(err => {
+        this.errorMsg = err.status + ': ' + err.statusText;
+        if (err.statusText.includes('Unknown')) {
+          this.errorMsg += ' - Possible no connection with backend server.';
+        }
+        this.forceElementView('bottom');
+      });
 
     // this.userService.getById(this.currentUser._id).pipe(first()).subscribe(user => {
     //   this.userFromApi = user as User;
     // });
+  }
+
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
   }
 }

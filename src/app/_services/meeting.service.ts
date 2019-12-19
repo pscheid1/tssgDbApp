@@ -48,6 +48,8 @@ export class MeetingService {
 
   async addMeeting(obj: Meeting) {
     // console.log('meeting.service.addMeeting: meetingDate = ' + obj._id + ' - ' + obj.meetingDate);
+    // console.log('meeting.service.addMeeting: startTime = ' + obj._id + ' - ' + obj.startTime);
+    // console.log('meeting.service.addMeeting: endTime = ' + obj._id + ' - ' + obj.endTime);
     return await this.http.post(`${this.uri}/add`, obj)
       .toPromise()
       .then(this.extractData)
@@ -103,6 +105,8 @@ export class MeetingService {
   // post meeting data to update back to the node server. called from meeting-edit.component.ts
   async updateMeeting(obj: Meeting) {
     // console.log('meeting.service.updateMeeting: meetingDate = ' + obj._id + ' - ' + obj.meetingDate);
+    // console.log('meeting.service.updateMeeting: startTime = ' + obj._id + ' - ' + obj.startTime);
+    // console.log('meeting.service.updateMeeting: endTime = ' + obj._id + ' - ' + obj.endTime);
     return await this.http.post(`${this.uri}/update`, obj)
       .toPromise()
       .then(this.extractData)

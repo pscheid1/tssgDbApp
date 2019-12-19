@@ -24,19 +24,23 @@ export class UserGetAllComponent implements OnInit {
 
     this.errorMsg = '';
     this.us.getAll()
-    .then(res => {
-      this.users = res as User[];
-    })
-    .catch(err => {
-      this.errorMsg = err.status + ': ' + err.statusText;
-      if (err.statusText.includes('Unknown')) {
-        this.errorMsg += ' - Possible no connection with backend server.';
-      }
-      if ((window.location.href).indexOf('#bottom') < 0) {
-        window.location.href = window.location.href + '#bottom';
-      }
-    });
+      .then(res => {
+        this.users = res as User[];
+      })
+      .catch(err => {
+        this.errorMsg = err.status + ': ' + err.statusText;
+        if (err.statusText.includes('Unknown')) {
+          this.errorMsg += ' - Possible no connection with backend server.';
+        }
+        this.forceElementView('bottom');
+      });
 
+  }
+
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
   }
 
   deleteUser(_id) {
@@ -50,9 +54,7 @@ export class UserGetAllComponent implements OnInit {
         if (err.statusText.includes('Unknown')) {
           this.errorMsg += ' - Possible no connection with backend server.';
         }
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
   }
 }

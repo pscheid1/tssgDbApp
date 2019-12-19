@@ -41,6 +41,12 @@ export class MeetingGetComponent implements OnInit {
     }
   }
 
+  // scroll browser to element id
+  forceElementView(id: string) {
+    const element = document.getElementById(id);
+    element.scrollIntoView();
+  }
+
   deleteMeeting(_id) {
     this.errorMsg = '';
     this.ms.deleteMeeting(_id)
@@ -49,9 +55,7 @@ export class MeetingGetComponent implements OnInit {
       })
       .catch(err => {
         this.errorMsg = err.status + ': ' + err.statusText;
-        if ((window.location.href).indexOf('#bottom') < 0) {
-          window.location.href = window.location.href + '#bottom';
-        }
+        this.forceElementView('bottom');
       });
 
   }
