@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // TSSGAPIURL: 'http://localhost',
-  TSSGAPIURL: 'http://192.168.1.13',
+  TSSGAPIURL: 'http://localhost',
+  // TSSGAPIURL: 'http://192.168.1.13',
   TSSGAPIPORT: '7010'
 };
 

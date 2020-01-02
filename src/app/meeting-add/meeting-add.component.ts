@@ -62,6 +62,7 @@ export class MeetingAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.errorMsg = '';
     this.vs.listVenues().subscribe(v => {
       this.venues = v;
     });
@@ -81,7 +82,7 @@ export class MeetingAddComponent implements OnInit {
   }
 
   addMeeting(meetingForm: NgForm): void {
-
+    this.errorMsg = '';
     if (this.meeting._id === null) {
       this.errorMsg = 'Meeting Id is required.';
       this.forceElementView('bottom');
