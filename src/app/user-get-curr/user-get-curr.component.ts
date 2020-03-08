@@ -25,12 +25,6 @@ export class UserGetCurrComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.route.snapshot.data.type === 'authDenied') {
-    //   this.errorMsg = 'User is not authorized for this request.';
-    // } else {
-    //   this.errorMsg = '';
-    // }
-
     this.errorMsg = '';
 
     this.us.getCurrent()
@@ -45,11 +39,7 @@ export class UserGetCurrComponent implements OnInit {
         this.forceElementView('bottom');
       });
 
-    // this.us.getCurrent().pipe(first()).subscribe(user => {
-    //   // console.log('user-get.component.ngOnInit: ' + JSON.stringify({user}));
-    //   this.userFromApi = user;
-    // });
-  }
+    }
 
   // scroll browser to element id
   forceElementView(id: string) {

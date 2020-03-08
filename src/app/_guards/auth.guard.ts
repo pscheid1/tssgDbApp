@@ -2,8 +2,8 @@
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+// import { Observable, throwError } from 'rxjs';
+// import { catchError } from 'rxjs/operators';
 
 const jwtHelper = new JwtHelperService();
 
@@ -13,14 +13,14 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
-    // public jwtHelper: JwtHelperService
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       const token = currentUser.token;
-      // console.log('auth.guard.canActivate: token exp date = ' + jwtHelper.getTokenExpirationDate );
+      // console.error('currentUser.token: ' + token);
+      // console.log('auth.guard.canActivate: token exp date = ' + jwtHelper.getTokenExpirationDate(token));
       // Check whether token is valid.  Expired, return false; otherwise return true
       if (jwtHelper.isTokenExpired(token)) {
         alert('Your JWT token has expired.\n\nTo renew your JWT token, Logout and login again.');

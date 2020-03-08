@@ -49,14 +49,10 @@
         [minuteStep]="mstep" [showSeconds]="false" [ngModelOptions]="{standalone: true}">
       </timepicker>
 
-      <div class="form-group" [class.has-error]="comments.invalid && comments.touched"
-        [class.has-success]="comments.valid">
+      <div class="form-group">
         <label for="comments" class="control-label">Comments</label>
-        <input required id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
+        <input id="comments" name="comments" type="text" class="form-control" [(ngModel)]="meeting.comments"
           #comments="ngModel">
-        <span class="alert alert-danger" *ngIf="comments.invalid && comments.touched">
-          Comment is required
-        </span>
       </div>
       <div class="form-group">
         <!-- <button type='submit' class='btn btn-primary' [disabled]='meetingForm.invalid'>Save</button> -->
@@ -68,7 +64,7 @@
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>
 
 <br /><br />
 <!--

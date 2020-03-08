@@ -4,55 +4,57 @@
       <h4 class="panel-title">List All Venues</h4>
       <p>&nbsp;</p>
     </div>
-      <table class="table-fixed">
-        <thead>
-          <tr>
-            <th>Venue</th>&nbsp;
-            <th>Description</th>&nbsp;
-            <th>Contact</th>&nbsp;
-            <!-- <th>Website</th> -->
-            <!-- <th>Calendar</th> -->
-            <th>Address</th>&nbsp;
-            <th>Town</th>&nbsp;
-            <th>Location</th>&nbsp;
-            <th>Icon Image</th>&nbsp;
-            <th></th>&nbsp;
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <!-- three empty lines will push first display line below  -->
-          <tr>&nbsp;</tr>
-          <tr>&nbsp;</tr>
-          <tr>&nbsp;</tr>
-          <tr *ngFor="let venue of venues">
-            <td>{{venue._id}}</td>&nbsp;
-            <td>{{venue.description}}</td>&nbsp;
-            <td>{{venue.contact}}</td>&nbsp;
-            <!-- <td>{{venue.website}}</td> -->
-            <!-- <td>{{venue.calendar}}</td> -->
-            <td>{{venue.address}}</td>&nbsp;
-            <td>{{venue.town}}</td>&nbsp;
-            <td>{{venue.location}}</td>&nbsp;
-            <td>{{venue.iconimage}}</td>&nbsp;
-            <!--
-          pass control to venue-edit.components constructor via app-routing.module.ts
-          this will retrieve venue and display in venue-edit.component.html
+    <table class="table-fixed">
+      <thead>
+        <tr>
+          <th>Venue</th>&nbsp;
+          <th>Description</th>&nbsp;
+          <th>Contact</th>&nbsp;
+          <!-- <th>Website</th> -->
+          <!-- <th>Calendar</th> -->
+          <th>Address</th>&nbsp;
+          <th>Town</th>&nbsp;
+          <th>Location</th>&nbsp;
+          <th>Icon Image</th>&nbsp;
+          <th>Photo Image</th>&nbsp;
+          <th></th>&nbsp;
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--
+          For some unknown (to me) reason, the table body
+          display lines start at the same height as the
+          table header. The three following blank rows
+          push the body below the header.
         -->
-            <td><a [routerLink]="['edit', venue._id]" class="btn btn-primary btn-sm">Edit</a></td>&nbsp;
-
-            <td><a (click)="deleteVenue(venue._id)" class="btn btn-danger btn-sm" style="color: white">Del</a></td>
-          </tr>
-          <tr *ngIf="!venues">
-            <td colspan="10">Loading data. Please wait... </td>
-          </tr>
-          <tr *ngIf="venues && venues.length==0">
-            <td colspan="10">No venues to display</td>
-          </tr>
-        </tbody>
-      </table>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr *ngFor="let venue of venues">
+          <td>{{venue._id}}</td>&nbsp;
+          <td>{{venue.description}}</td>&nbsp;
+          <td>{{venue.contact}}</td>&nbsp;
+          <!-- <td>{{venue.website}}</td> -->
+          <!-- <td>{{venue.calendar}}</td> -->
+          <td>{{venue.address}}</td>&nbsp;
+          <td>{{venue.town}}</td>&nbsp;
+          <td>{{venue.location}}</td>&nbsp;
+          <td>{{venue.iconimage}}</td>&nbsp;
+          <td>{{venue.photoimage}}</td>&nbsp;
+          <td><a [routerLink]="['edit', venue._id]" class="btn btn-primary btn-sm">Edit</a></td>&nbsp;
+          <td><a (click)="deleteVenue(venue._id)" class="btn btn-danger btn-sm" style="color: white">Del</a></td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr *ngIf="!venues">
+          <td colspan="10">Loading data. Please wait... </td>
+        </tr>
+        <tr *ngIf="venues && venues.length==0">
+          <td colspan="10">No venues to display</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>

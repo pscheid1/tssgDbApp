@@ -12,76 +12,50 @@
           Venue Name is required
         </span>
       </div>
-      <div class="form-group" [class.has-error]="description.invalid && description.touched"
-        [class.has-success]="description.valid">
+      <div class="form-group">
         <label for="_id" class="control-label"> Description</label>
-        <input required id="description" name="description" type="text" class="form-control"
-          [(ngModel)]="venue.description" #description="ngModel">
-        <span class="alert alert-danger" *ngIf="description.invalid && description.touched">
-          Venue description is required
-        </span>
+        <input id="description" name="description" type="text" class="form-control" [(ngModel)]="venue.description"
+          #description="ngModel">
       </div>
-      <div class="form-group" [class.has-error] = "contact.invalid && contact.touched"
-      [class.has-success]="contact.valid">
+      <div class="form-group">
         <label for="contact" class="control-label"> Contact (select one)</label>
-        <select required id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #contact="ngModel">
+        <select id="contact" name="contact" class="form-control" [(ngModel)]="venue.contact" #contact="ngModel">
           <option *ngFor="let contact of contactList" [value]="contact"> {{contact}}</option>
         </select>
-        <span class="alert alert-danger" *ngIf="contact.invalid && contact.touched">
-          Contact entry is required
-        </span>
       </div>
-      <div class="form-group" [class.has-error]="website.invalid && website.touched"
-        [class.has-success]="website.valid">
+      <div class="form-group">
         <label for="website" class="control-label"> Website URL</label>
-        <input required id="website" name="website" type="url" class="form-control" [(ngModel)]="venue.website"
+        <input id="website" name="website" type="url" class="form-control" [(ngModel)]="venue.website"
           #website="ngModel">
-        <span class="alert alert-danger" *ngIf="website.invalid && website.touched">
-          Venue website url is required.
-        </span>
       </div>
-      <div class="form-group" [class.has-error]="calendar.invalid && calendar.touched"
-        [class.has-success]="calendar.valid">
+      <div class="form-group">
         <label for="calendar" class="control-label"> Calendar URL</label>
-        <input required id="calendar" name="calendar" type="text" class="form-control" [(ngModel)]="venue.calendar"
+        <input id="calendar" name="calendar" type="text" class="form-control" [(ngModel)]="venue.calendar"
           #calendar="ngModel">
-        <span class="alert alert-danger" *ngIf="calendar.invalid && calendar.touched">
-          Venue calendar url is required.
-        </span>
       </div>
-      <div class="form-group" [class.has-error]="address.invalid && address.touched"
-        [class.has-success]="address.valid">
+      <div class="form-group">
         <label for="address" class="control-label"> Address</label>
-        <input required id="address" name="address" type="text" class="form-control" [(ngModel)]="venue.address"
+        <input id="address" name="address" type="text" class="form-control" [(ngModel)]="venue.address"
           #address="ngModel">
-        <span class="alert alert-danger" *ngIf="address.invalid && address.touched">
-          Venue address is required.
-        </span>
       </div>
-      <div class="form-group" [class.has-error]="town.invalid && town.touched" [class.has-success]="town.valid">
+      <div class="form-group">
         <label for="town" class="control-label"> Town</label>
-        <input required id="town" name="town" type="text" class="form-control" [(ngModel)]="venue.town" #town="ngModel">
-        <span class="alert alert-danger" *ngIf="town.invalid && town.touched">
-          Venue town is required.
-        </span>
+        <input id="town" name="town" type="text" class="form-control" [(ngModel)]="venue.town" #town="ngModel">
       </div>
-      <div class="form-group" [class.has-error]="location.invalid && location.touched"
-        [class.has-success]="location.valid">
+      <div class="form-group">
         <label for="location" class="control-label"> Location (Map URL)</label>
-        <input required id="location" name="location" type="text" class="form-control" [(ngModel)]="venue.location"
+        <input id="location" name="location" type="text" class="form-control" [(ngModel)]="venue.location"
           #location="ngModel">
-        <span class="alert alert-danger" *ngIf="location.invalid && location.touched">
-          Venue location url is required.
-        </span>
       </div>
-      <div class="form-group" [class.has-error]="iconimage.invalid && iconimage.touched"
-        [class.has-success]="iconimage.valid">
+      <div class="form-group">
         <label for="iconimage" class="control-label"> Venue Icon Image (path/file)</label>
-        <input required id="iconimage" name="iconimage" type="text" class="form-control" [(ngModel)]="venue.iconimage"
+        <input id="iconimage" name="iconimage" type="text" class="form-control" [(ngModel)]="venue.iconimage"
           #iconimage="ngModel">
-        <span class="alert alert-danger" *ngIf="iconimage.invalid && iconimage.touched">
-          Image path/file is required.
-        </span>
+      </div>
+      <div class="form-group">
+        <label for="photoimage" class="control-label"> Venue Photo Image (path/file)</label>
+        <input id="photoimage" name="photoimage" type="text" class="form-control" [(ngModel)]="venue.photoimage"
+          #photoimage="ngModel">
       </div>
       <div class="form-group">
         <!-- <button type="submit" class="btn btn-primary" [disabled]="venueForm.invalid">Save</button> -->
@@ -93,10 +67,10 @@
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br /><br /><br /><br /><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>
 <!--
 <br /><br />
 Angular Generated Form Model : {{venueForm.value | json}}
 <br /><br />
-Our User Model : {{venue | json}}
+Our Venue Model : {{venue | json}}
  -->

@@ -30,45 +30,41 @@ export class UserService {
     return body || {};
   }
 
-  private handleErrorPromise(error: Error | HttpErrorResponse) {
-    if (error instanceof HttpErrorResponse) {
-      // Server or connection error happened
-      if (!navigator.onLine) {
-        // Handle offline error
-        console.error('user.service.handleErrorPromise offline error: ' + error);
+  /*
+     private handleErrorPromise(error: Error | HttpErrorResponse) {
+      if (error instanceof HttpErrorResponse) {
+        // Server or connection error happened
+        if (!navigator.onLine) {
+          // Handle offline error
+          console.error('user.service.handleErrorPromise offline error: ' + error);
+        } else {
+          // Handle Http Error (error.status === 403, 404...)
+          HttpErrorResponse.toString();
+          console.error('user.service.handleErrorPromise HttpErrorResponse: ' + HttpErrorResponse.toString());
+        }
       } else {
-        // Handle Http Error (error.status === 403, 404...)
-        HttpErrorResponse.toString();
-        console.error('user.service.handleErrorPromise HttpErrorResponse: ' + HttpErrorResponse.toString());
+        console.error('user.service.handleErrorPromise Error: ' + error);
+        console.error('user.service.handleErrorPromise Error: name ' + error.name + ' - message ' + error.message);
       }
-    } else {
-      console.error('user.service.handleErrorPromise Error: ' + error);
-      console.error('user.service.handleErrorPromise Error: name ' + error.name + ' - message ' + error.message);
+
+      return Promise.reject(error || error.message);
     }
-
-    return Promise.reject(error || error.message);
-  }
-
-
-  // private handleErrorPromise (error: HttpErrorResponse | any) {
-  //   return Promise.reject(error.message || error);
-  // }
-
+   */
+  /*
+    private handleErrorPromise (error: HttpErrorResponse | any) {
+      return Promise.reject(error.message || error);
+    }
+   */
   async getAll() {
-    // return this.http.get<User[]>(`${this.uri}`);
-
     return await this.http.get(`${this.uri}`)
       .toPromise()
       .then(this.extractData)
       .catch(err => {
         throw new HttpErrorResponse({ status: 404, statusText: err, url: `${this.uri}` });
       });
-
   }
 
   async getCurrent() {
-    // return this.http.get<User>(`${this.uri}/current`);
-
     return await this.http.get(`${this.uri}/current`)
       .toPromise()
       .then(this.extractData)
@@ -90,7 +86,6 @@ export class UserService {
   }
 
   async getById(_id: string) {
-    // return this.http.get(`${this.uri}/edit/` + _id);
     return await this.http.get(`${this.uri}/edit/${_id}`)
       .toPromise()
       .then(this.extractData)
@@ -116,7 +111,7 @@ export class UserService {
       .toPromise()
       .then(this.extractData)
       .catch(err => {
-        throw new HttpErrorResponse({ status: 409, statusText: err, url: `${this.uri}/register` });
+        throw new HttpErrorResponse({ status: 400, statusText: err, url: `${this.uri}/register` });
       });
   }
 
@@ -125,7 +120,7 @@ export class UserService {
       .toPromise()
       .then(this.extractData)
       .catch(err => {
-        throw new HttpErrorResponse({ status: 404, statusText: err, url: `${this.uri}/update` });
+        throw new HttpErrorResponse({ status: 400, statusText: err, url: `${this.uri}/update` });
       });
   }
 }

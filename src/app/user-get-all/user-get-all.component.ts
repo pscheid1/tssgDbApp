@@ -18,11 +18,8 @@ export class UserGetAllComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.userService.getAll().pipe(first()).subscribe(users => {
-    //   this.users = users;
-    // });
-
     this.errorMsg = '';
+
     this.us.getAll()
       .then(res => {
         this.users = res as User[];

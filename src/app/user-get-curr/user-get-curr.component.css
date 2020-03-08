@@ -5,7 +5,7 @@ btnc {
 .table-fixed thead th {
   position: sticky;
   position: -webkit-sticky;
-  top: 100px;
+  top: 120px;
   z-index: 50;
   background-color: white;
   color: blue;
@@ -23,6 +23,6 @@ td {
 .panel-heading {
   position: fixed;
   width: 100%;   /* to enforce z-index */
-  z-index: 50;
+  z-index: 60;
   background-color: white;
 }

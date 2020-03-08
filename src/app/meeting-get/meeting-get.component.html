@@ -4,50 +4,51 @@
       <h4 class="panel-title">{{heading}}</h4>
       <p>&nbsp;</p>
     </div>
-      <table class="table-fixed">
-        <thead>
-          <tr>
-            <th>Meeting Id</th>&nbsp;
-            <th>Team</th>&nbsp;
-            <th>Venue</th>&nbsp;
-            <th>Date</th>&nbsp;
-            <th>Start</th>&nbsp;
-            <th>End</th>&nbsp;
-            <th>Comments</th>&nbsp;
-            <th></th>&nbsp;
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <!-- three empty lines will push first display line below  -->
-          <tr>&nbsp;</tr>
-          <tr>&nbsp;</tr>
-          <tr>&nbsp;</tr>
-          <tr *ngFor="let meeting of meetings">
-            <td>{{meeting._id}}</td>&nbsp;
-            <td>{{meeting.team}}</td>&nbsp;
-            <td>{{meeting.venue}}</td>&nbsp;
-            <td>{{meeting.meetingDate | date: 'E LLL dd'}}</td>&nbsp;
-            <td>{{meeting.startTime | date: 'hh:mm aaaaa'}}</td>&nbsp;
-            <td>{{meeting.endTime | date: 'hh:mm aaaaa'}}</td>&nbsp;
-            <td>{{meeting.comments}}</td>&nbsp;
-            <!--
-            pass control to meeting-edit.components constructor via app-routing.module.ts
-            this will retrieve meeting and display in meeting-edit.component.html
-          -->
-            <td><a [routerLink]="routerlink + meeting._id" class="btn btn-primary btn-sm">Edit</a></td>&nbsp;
-            <td><a (click)="deleteMeeting(meeting._id)" class="btn btn-danger btn-sm" style="color: white">Del</a></td>
-          </tr>
-          <tr *ngIf="!meetings">
-            <td colspan="10">Loading data. Please wait... </td>
-          </tr>
-          <tr *ngIf="meetings && meetings.length==0">
-            <td colspan="10">No meetings to display</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="table-fixed">
+      <thead>
+        <tr>
+          <th>Meeting Id</th>&nbsp;
+          <th>Team</th>&nbsp;
+          <th>Venue</th>&nbsp;
+          <th>Date</th>&nbsp;
+          <th>Start</th>&nbsp;
+          <th>End</th>&nbsp;
+          <th>Comments</th>&nbsp;
+          <th></th>&nbsp;
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--
+          For some unknown (to me) reason, the table body
+          display lines start at the same height as the
+          table header. The three following blank rows
+          push the body below the header.
+        -->
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr>&nbsp;</tr>
+        <tr *ngFor="let meeting of meetings">
+          <td>{{meeting._id}}</td>&nbsp;
+          <td>{{meeting.team}}</td>&nbsp;
+          <td>{{meeting.venue}}</td>&nbsp;
+          <td>{{meeting.meetingDate | date: 'E LLL dd yyyy'}}</td>&nbsp;
+          <td>{{meeting.startTime | date: 'hh:mm aaaaa'}}</td>&nbsp;
+          <td>{{meeting.endTime | date: 'hh:mm aaaaa'}}</td>&nbsp;
+          <td>{{meeting.comments}}</td>&nbsp;
+          <td><a [routerLink]="routerlink + meeting._id" class="btn btn-primary btn-sm">Edit</a></td>&nbsp;
+          <td><a (click)="deleteMeeting(meeting._id)" class="btn btn-danger btn-sm" style="color: white">Del</a></td>
+        </tr>
+        <tr>&nbsp;</tr>
+        <tr *ngIf="!meetings">
+          <td colspan="10">Loading data. Please wait... </td>
+        </tr>
+        <tr *ngIf="meetings && meetings.length==0">
+          <td colspan="10">No meetings to display</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>

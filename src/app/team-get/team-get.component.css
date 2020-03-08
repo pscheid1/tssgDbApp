@@ -23,6 +23,6 @@ td {
 .panel-heading {
   position: fixed;
   width: 100%;   /* to enforce z-index */
-  z-index: 50;
+  z-index: 60;
   background-color: white;
 }

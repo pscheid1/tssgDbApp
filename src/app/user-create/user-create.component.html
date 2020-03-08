@@ -33,6 +33,9 @@
           <input required type="radio" value="Contact" name="role" [(ngModel)]="user.role" #role="ngModel"
             style="width:4ch">Contact
         </div>
+        <span class="alert alert-danger" *ngIf="role.invalid && role.touched">
+          Role is required
+        </span>
       </div>
       <div class="form-group" [class.has-error]="firstname.invalid && firstname.touched"
         [class.has-success]="firstname.valid">
@@ -54,22 +57,19 @@
       </div>
       <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
         <label for="email" class="control-label">Email</label>
-        <!-- required and email validators -->
-        <input required email id="email" name="email" type="email" class="form-control" [(ngModel)]="user.email"
+        <!-- enable email validators -->
+        <input email id="email" name="email" type="email" class="form-control" [(ngModel)]="user.email"
           #email="ngModel">
-        <span class="alert alert-danger" *ngIf="email.errors?.required && email.touched">
-          Email is required
-        </span>
         <span class="alert alert-danger" *ngIf="email.errors?.email && email.touched">
           Email is invalid
         </span>
       </div>
-      <div class="form-group" [class.has-error]="mobile.invalid && mobile.touched" [class.has-success]="mobile.valid">
+      <div class="form-group">
         <label for="mobile" class="control-label">Mobile</label>
-        <input required number id="mobile" name="mobile" type="tel" class="form-control" [(ngModel)]="user.mobile"
+        <input number id="mobile" name="mobile" type="tel" class="form-control" [(ngModel)]="user.mobile"
           #mobile="ngModel">
         <span class="alert alert-danger" *ngIf="mobile.invalid && mobile.touched">
-          Mobile is required
+          Mobile entry must be a number
         </span>
       </div>
       <div class="form-group">
@@ -86,10 +86,10 @@
       &nbsp;
       <button type="reset" class="btn btn-success" (click)="cancel()">Cancel</button>
     </div>
-    </div>
+  </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>
 <!-- <br/><br/>
 Error message: {{error}}
 <br/><br/>

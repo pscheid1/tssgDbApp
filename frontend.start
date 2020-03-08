@@ -1,0 +1,12 @@
+#!/bin/bash
+# frontend.start                                 # Start the frontend services
+
+timeout="2s"
+
+date
+echo "   Waiting ${timeout} seconds ..."
+sleep $timeout
+date
+
+#npm run dev
+node_modules/@angular/cli/bin/ng serve --host 0.0.0.0 --disableHostCheck true --port 4200

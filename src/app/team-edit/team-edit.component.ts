@@ -77,55 +77,33 @@ export class TeamEditComponent implements OnInit {
 
   updateTeam(teamForm: NgForm) {
 
-    if (this.team._id === null) {
-      this.errorMsg = 'Team name is required.';
-      this.forceElementView('bottom');
-      return;
-    }
-    this.team._id = this.team._id.trim();
-    if (this.team._id.length === 0) {
+    if (!this.team._id || this.team._id.trim().length === 0) {
       this.errorMsg = 'Team name is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.team.description === null) {
-      this.errorMsg = 'Team description is required.';
-      this.forceElementView('bottom');
-      return;
-    }
-    this.team.description = this.team.description.trim();
-    if (this.team.description.length === 0) {
+    if (!this.team.description || this.team.description.trim().length === 0) {
       this.errorMsg = 'Team description is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.team.teamLead === null) {
-      this.errorMsg = 'Team lead is required.';
-      this.forceElementView('bottom');
-      return;
-    }
-    this.team.teamLead = this.team.teamLead.trim();
-    if (this.team.teamLead.length === 0) {
+    if (!this.team.teamLead || this.team.teamLead.trim().length === 0) {
       this.errorMsg = 'Team lead is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.team.members === null) {
+    if (!this.team.members) {
       this.errorMsg = 'One or more team members are required.';
       this.forceElementView('bottom');
       return;
     }
-    if (this.team.members.length === 0) {
-      this.errorMsg = 'One or more team members are required.';
-      this.forceElementView('bottom');
-      return;
-    }
-
-    this.team.zoomLink = this.team.zoomLink.trim();
-    this.team.comments = this.team.comments.trim();
+    // none of the other entries are requied, therefore
+    // no validation is required.
+    // any entries will be trimmed by the database if
+    // requested in the schema.
 
     this.errorMsg = '';
     this.ts.updateteam(this.team)

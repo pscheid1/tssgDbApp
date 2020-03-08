@@ -19,7 +19,12 @@
         </tr>
       </thead>
       <tbody>
-        <!-- three empty lines will push first display line below header line -->
+        <!--
+          For some unknown (to me) reason, the table body
+          display lines start at the same height as the
+          table header. The three following blank rows
+          push the body below the header.
+        -->
         <tr>&nbsp;</tr>
         <tr>&nbsp;</tr>
         <tr>&nbsp;</tr>
@@ -34,6 +39,7 @@
           <td><a [routerLink]="['edit', user._id]" class="btn btn-primary btn-sm">Edit</a></td>&nbsp;
           <td><a (click)="deleteUser(user._id)" class="btn btn-danger btn-sm" style="color: white">Del</a></td>
         </tr>
+        <tr>&nbsp;</tr>
         <tr *ngIf="!users && !errorMsg">
           <td colspan="5">Loading data. Please wait... </td>
         </tr>
@@ -45,4 +51,4 @@
   </div>
 </form>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
-<div><br/><br/><br/><br/><a id="bottom"></a></div>
+<div><a id="bottom"></a></div>

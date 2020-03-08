@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { MeetingAddComponent } from './meeting-add/meeting-add.component';
 import { MeetingEditComponent } from './meeting-edit/meeting-edit.component';
 import { MeetingGetComponent } from './meeting-get/meeting-get.component';
@@ -60,7 +59,6 @@ import { MeetingGetScheduleComponent } from './meeting-get-schedule/meeting-get-
    imports: [
       BrowserModule,
       AppRoutingModule,
-      SlimLoadingBarModule.forRoot(),
       ReactiveFormsModule,
       HttpClientModule,
       FormsModule,

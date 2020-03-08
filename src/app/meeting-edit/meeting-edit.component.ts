@@ -121,57 +121,32 @@ export class MeetingEditComponent implements OnInit {
 
   updateMeeting(meetingForm: NgForm) {
 
-    // These first three tests should not be required as it should
-    // be impossible to delete the existing entry.  For the team and
-    // venue, they may be changed, but not deleted.
+    // Test for meeting id, team and venue should not be required as it should
+    // be impossible to delete or change the existing meeting id entry.
+    // For the team and venue, they may be changed, but not deleted.
 
-    // if (this.meeting._id === null) {
-    //   this.errorMsg = 'Meeting Id is required.';
-    //   this.forceElementView('bottom');
-    //   return;
-    // }
-
-    // if (this.meeting.team === null) {
-    //   this.errorMsg = 'Meeting Team is required.';
-    //   this.forceElementView('bottom');
-    //   return;
-    // }
-
-    // if (this.meeting.venue === null) {
-    //   this.errorMsg = 'Meeting Venue is required.';
-    //   this.forceElementView('bottom');
-    //   return;
-    // }
-
-    if (this.meeting.meetingDate === null) {
+    if (!this.meeting.meetingDate) {
       this.errorMsg = 'Meeting meetingDate is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.startTime === null) {
+    if (!this.meeting.startTime) {
       this.errorMsg = 'Meeting startTime is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.endTime === null) {
+    if (!this.meeting.endTime) {
       this.errorMsg = 'Meeting endTime is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.comments === null) {
-      this.errorMsg = 'A Comments entry is required.';
-      this.forceElementView('bottom');
-      return;
-    }
-    this.meeting.comments = this.meeting.comments.trim();
-    if (this.meeting.comments.length === 0) {
-      this.errorMsg = 'A Comments entry is required.';
-      this.forceElementView('bottom');
-      return;
-    }
+    // none of the other entries are requied, therefore
+    // no validation is required.
+    // any entries will be trimmed by the database if
+    // requested in the schema.
 
     let hours = this.meeting.startTime.getHours();
     if (hours < 0 || hours > 23) {
@@ -208,7 +183,8 @@ export class MeetingEditComponent implements OnInit {
     }
 
     // If meetingDate is a string, it has not been altered. Do not test as
-    // it may be a date in the past.
+    // it may be a date in the past. An expired meeting is OK but createing
+    // a meeting in the past is not allowed.
     // If meetingDate has been changed, with or without the date picker, it
     // will be an object.
     if (typeof (this.meeting.meetingDate) === 'object') {

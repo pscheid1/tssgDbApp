@@ -28,16 +28,6 @@ export class MeetingAddComponent implements OnInit {
     comments: null
   };
 
-  // newMeeting: Meeting = {
-  //   _id: null,
-  //   team: null,
-  //   venue: null,
-  //   meetingDate: null,
-  //   startTime: null,
-  //   endTime: null,
-  //   comments: null
-  // };
-
   hstep = 1;
   mstep = 15;
   sstep = 10;
@@ -83,53 +73,47 @@ export class MeetingAddComponent implements OnInit {
 
   addMeeting(meetingForm: NgForm): void {
     this.errorMsg = '';
-    if (this.meeting._id === null) {
+    if (!this.meeting._id || this.meeting._id.trim().length === 0) {
       this.errorMsg = 'Meeting Id is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.team === null) {
+    if (!this.meeting.team || this.meeting.team.trim().length === 0) {
       this.errorMsg = 'Meeting Team is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.venue === null) {
+    if (!this.meeting.venue || this.meeting.venue.trim().length ===0) {
       this.errorMsg = 'Meeting Venue is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.meetingDate === null) {
+    if (!this.meeting.meetingDate) {
       this.errorMsg = 'Meeting meetingDate is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.startTime === null) {
+    if (!this.meeting.startTime) {
       this.errorMsg = 'Meeting startTime is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.endTime === null) {
+    if (!this.meeting.endTime) {
       this.errorMsg = 'Meeting endTime is required.';
       this.forceElementView('bottom');
       return;
     }
 
-    if (this.meeting.comments === null) {
-      this.errorMsg = 'A Comments entry is required.';
-      this.forceElementView('bottom');
-      return;
-    }
-    this.meeting.comments = this.meeting.comments.trim();
-    if (this.meeting.comments.length === 0) {
-      this.errorMsg = 'A Comments entry is required.';
-      this.forceElementView('bottom');
-      return;
-    }
+    // meeting.comments is not requied, therefore
+    // no validation is required.
+    // any entry will be trimmed by the database if
+    // requested in the schema.
+
 
     let hours = this.meeting.startTime.getHours();
     if (hours < 0 || hours > 23) {

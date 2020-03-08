@@ -11,4 +11,5 @@ export class Venue {
   town: string;
   location: string;
   iconimage: string;
+  photoimage: string;
 }

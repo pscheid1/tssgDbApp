@@ -11,7 +11,6 @@ import { MeetingService } from '../_services/meeting.service';
 })
 export class MeetingGetScheduleComponent implements OnInit {
   teamname = '';
-  // team: string;
   teams: any = [];
   errorMsg = '';
 
