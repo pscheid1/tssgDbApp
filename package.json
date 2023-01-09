@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "^9.0.0",
     "@angular/router": "^9.0.0",
     "@auth0/angular-jwt": "^4.0.0",
-    "auth0": "^2.22.0",
+    "auth0": "^3.0.1",
     "fibers": "^4.0.2",
     "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^3.2.0",
